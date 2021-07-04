@@ -178,9 +178,6 @@ if __name__ == '__main__':
     periodsize = rate
     out = alsaaudio.PCM(alsaaudio.PCM_PLAYBACK, channels=1, rate=rate, format=alsaaudio.PCM_FORMAT_S16_LE, periodsize=periodsize, device=device)
     t = 0
-    shake = SHAKE256.new()
-    shake.update(b'Your Secret Key Here')
-
     spread_per_bit = 128
     spread_repeat = 1
 
@@ -188,6 +185,9 @@ if __name__ == '__main__':
     while True:
         while len(binary_data_buffer) < 2*periodsize:
             # waveform = [ (sin(440*2*pi*(t+dt))+1) * .5 * amplitude for dt in np.arange(0, delta, 1/rate)] # between 0 and 1
+            shake = SHAKE256.new()
+            shake.update(b'Your Secret Key Here')
+
             information = bytes2bin(b"KNOWNPREFIX Hello World! ")
             # print(information[:10])
             dsss = bytes2bin(shake.read(ceil(len(information)/8) * spread_per_bit))
