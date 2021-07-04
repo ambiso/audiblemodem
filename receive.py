@@ -21,7 +21,7 @@ import time
 import alsaaudio
 import matplotlib.pyplot as plt
 
-from playback import decode, plot_fft
+from transmit import decode, plot_fft
 
 if __name__ == '__main__':
 
