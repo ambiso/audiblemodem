@@ -1,6 +1,7 @@
 # Audible Modem
 
-Trying to create a modem that transmits information via sound.
+Trying to create a modem that transmits information via sound (much like [`minimodem`](https://github.com/kamalmostafa/minimodem)),
+but using a secret key to "hide" the message in noise using DSSS.
 
 ## Tech
 
@@ -20,3 +21,18 @@ An XOF is essentially a hash function with an arbitrary output length.
 This essentially yields an insecure (read: unauthenticated) and inefficient (lots of randomness has to be generated for each bit) cipher.
 However, it also yields some interesting properties (that have very likely been studied before): if 
 the amplitude of the signal is low enough an adversary could likely not distinguish the signal from random noise, unless they have access to the secret key that the XOF is initialized with (but this likely also depends on how powerful the adversary is; i.e. how many antennas and locations they have access to).
+
+## Usage
+
+Using Pipenv:
+
+```
+pipenv install
+pipenv shell
+python transmit.py
+python receive.py
+```
+
+Currently it does not work: transmission via an actual audio device works,
+but the receiver cannot decode the signal.
+However, encoding and decoding of the original signal does work.
